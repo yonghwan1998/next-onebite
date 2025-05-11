@@ -35,8 +35,10 @@ http://localhost:5555/
 npx prisma studio
 
 ## 📦 설치 방법(Next.js)
-1. 
 npx create-next-app@14 section02
 
 ## 📦 버전
 Next.js: v14
+
+## 실행 방법
+npm run dev
