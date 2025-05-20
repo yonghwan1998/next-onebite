@@ -2,43 +2,93 @@
 
 Next.js 학습
 
-## 📦 설치 방법(백엔드 서버)
+---
 
-1. 깃허브에서 백엔드 서버 .zip 다운로드
-https://github.com/winterlood/onebite-books-server
+## 📦 설치 방법 (Backend Server)
 
-2. supabase에서 new project 생성
-knPgOmYi1VA2mc0V
+1. GitHub에서 backend server `.zip` 파일 다운로드  
+   👉 https://github.com/winterlood/onebite-books-server
 
-3. .env 생성 후 아래 코드 넣기
-# Connect to Supabase via connection pooling
-DATABASE_URL="postgresql://postgres.odgxixhrgbtpisibzzao:[YOUR-PASSWORD]@aws-0-ap-northeast-2.pooler.supabase.com:6543/postgres?pgbouncer=true"
+2. 프로젝트 폴더에 압축 해제 후, 에디터로 열기
 
-# Direct connection to the database. Used for migrations
-DIRECT_URL="postgresql://postgres.odgxixhrgbtpisibzzao:[YOUR-PASSWORD]@aws-0-ap-northeast-2.pooler.supabase.com:5432/postgres"
+3. [Supabase](https://supabase.com/)에서 새 프로젝트 생성 후 Database Password 복사
 
-4. supabase와 연결
-npx prisma db push
+4. Supabase 대시보드 상단의 **"Connect"** 버튼 클릭 → Connection string 복사
 
-5. supabase에 시드값 넣기
-npm run seed
+5. 루트 디렉토리에 `.env` 파일 생성 후 connection string 추가
 
-6. build
-npm run build
+   ```env
+   # Connection Pooling
+   DATABASE_URL="postgresql://postgres.itnyhhtfiptlycugucat:[YOUR-PASSWORD]@aws-0-ap-northeast-2.pooler.supabase.com:6543/postgres?pgbouncer=true"
 
-7. backend 서버 실행
-npm run start
+   # Direct DB connection (for migrations)
+   DIRECT_URL="postgresql://postgres.itnyhhtfiptlycugucat:[YOUR-PASSWORD]@aws-0-ap-northeast-2.pooler.supabase.com:5432/postgres"
+   ```
 
-8. apiece, db 정보 확인
-http://localhost:12345/api#/
-http://localhost:5555/
-npx prisma studio
+6. `[YOUR-PASSWORD]` 부분에 Supabase Database 비밀번호 입력
 
-## 📦 설치 방법(Next.js)
-npx create-next-app@14 section02
+7. 의존성 설치
 
-## 📦 버전
-Next.js: v14
+   ```bash
+   npm install
+   ```
 
-## 실행 방법
-npm run dev
+8. Supabase Database 초기화
+
+   ```bash
+   npx prisma db push
+   ```
+
+9. Supabase Database 시드 데이터 삽입
+
+   ```bash
+   npm run seed
+   ```
+
+10. Backend Server 빌드
+
+    ```bash
+    npm run build
+    ```
+
+11. Backend Server 실행
+
+    ```bash
+    npm run start
+    ```
+
+12. 확인용 URL 및 도구
+
+    - API 서버: [http://localhost:12345](http://localhost:12345)
+    - API 테스트: [http://localhost:12345/api](http://localhost:12345/api)
+    - DB 관리: `npx prisma studio` → [http://localhost:5555](http://localhost:5555)
+
+---
+
+## 📦 설치 방법 (Frontend - Next.js)
+
+```bash
+npx create-next-app@14 [프로젝트명 혹은 폴더명]
+```
+
+---
+
+## 📌 사용 버전
+
+- Next.js: `v14`
+
+---
+
+## ▶ 실행 방법
+
+- **Backend**:
+
+  ```bash
+  npm run start
+  ```
+
+- **Frontend** (Next.js):
+
+  ```bash
+  npm run dev
+  ```
