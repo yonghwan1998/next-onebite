@@ -3,8 +3,22 @@ import style from "./index.module.css";
 import SearchableLayout from "@/components/searchable-layout";
 import books from "@/mock/books.json";
 import BookItem from "@/components/book-item";
+import { InferGetServerSidePropsType } from "next";
 
-export default function Home() {
+export const getServerSideProps = () => {
+
+  console.log("123");
+  const data = "hello";
+
+  return {
+    props: {
+      data,
+    },
+  };
+};
+
+export default function Home({ data }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  console.log(data);
   return (
     <div className={style.container}>
       <section>
