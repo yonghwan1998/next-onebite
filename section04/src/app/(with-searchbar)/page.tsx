@@ -3,6 +3,8 @@ import style from "./page.module.css";
 import books from "@/mock/books.json";
 import { BookData } from "@/types";
 
+// export const dynamic = 'force-dynamic';
+
 async function AllBooks () {
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/book`, {cache: 'force-cache'});
   if(response.ok === false) {
