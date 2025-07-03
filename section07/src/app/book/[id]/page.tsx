@@ -1,26 +1,26 @@
+// src/app/book/[id]/page.tsx
+
 import { notFound } from "next/navigation";
 import style from "./page.module.css";
 
-// export const dynamicParams = false;
-
-export function generateStaticParams () {
+export function generateStaticParams() {
   return [
-    { id: '1' },
-    { id: '2' },
-    { id: '3' },
+    { id: "1" },
+    { id: "2" },
+    { id: "3" },
   ];
 }
 
-async function BookDetail({bookId}: {bookId: string}) {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/book/${bookId}`);
+async function BookDetail({ bookId }: { bookId: string }) {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/book/${bookId}`
+  );
 
-  if(response.ok === false) {
-    if(response.status === 404) {
+  if (response.ok === false) {
+    if (response.status === 404) {
       notFound();
     }
-    return (
-      <div>오류가 발생했습니다...</div>
-    );
+    return <div>오류가 발생했습니다...</div>;
   }
 
   const book = await response.json();
@@ -46,14 +46,13 @@ async function BookDetail({bookId}: {bookId: string}) {
 }
 
 function ReviewEditor() {
-
   async function createReviewAction(formData: FormData) {
     'use server';
 
     const content = formData.get('content')?.toString();
     const author = formData.get('author')?.toString();
-
   }
+
   return (
     <section>
       <form action={createReviewAction}>
@@ -65,14 +64,19 @@ function ReviewEditor() {
   );
 }
 
-export default function Page({
+export default async function Page({
   params,
 }: {
-  params: { id: string; };
+  params: Promise<{ id: string }>;
 }) {
+
+  const { id } = await params;
+
+  const bookDetail = await BookDetail({ bookId: id });
+
   return (
     <div className={style.container}>
-      <BookDetail bookId={params.id} />
+      {bookDetail}
       <ReviewEditor />
     </div>
   );
